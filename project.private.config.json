@@ -5,7 +5,6 @@
     "compileHotReLoad": true,
     "urlCheck": false
   },
-  "libVersion": "2.16.0",
   "condition": {
     "miniprogram": {
       "list": [
@@ -19,7 +18,14 @@
         {
           "name": "视频播放",
           "pathName": "pages/detail-video/detail-video",
-          "query": "id=14556339",
+          "query": "id= 5186456364",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "歌曲详情",
+          "pathName": "pages/detail-menu/detail-menu",
+          "query": "",
           "launchMode": "default",
           "scene": null
         }

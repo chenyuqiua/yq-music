@@ -2,12 +2,16 @@
   "pages": [
     "pages/main-music/main-music",
     "pages/main-video/main-video",
-    "pages/detail-video/detail-video"
+    "pages/detail-video/detail-video",
+    "pages/detail-search/detail-search",
+    "components/song-item-v1/song-item-v1",
+    "pages/detail-song/detail-song",
+    "pages/detail-menu/detail-menu"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "宇秋音乐",
+    "navigationBarTitleText": "YQMusic",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

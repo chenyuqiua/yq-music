@@ -1,3 +1,107 @@
 // pages/main-music/main-music.js
+import { getMusicBanner, getSongMenuList } from "../../services/music"
+import querySelect from "../../utils/query-select"
+import throttle from "../../utils/throttle"
+import rankingStore from "../../storge/rankingStore"
+
+// 添加节流函数
+const querySelectThrottle = throttle(querySelect)
+
 Page({
+  data: {
+    searchValue: "",
+    banners: [],
+    bannerHeight: 0,
+    recommendSongs: [],
+
+    // 歌单数据
+    hotMenuList: [],
+    recMenuList: [],
+
+    // 排行榜数据
+    rankingInfos: {}
+  },
+
+  onLoad() {
+    // 调用封装网络请求的函数
+    this.fetchMusicBanner()
+    this.fetchSongMenuList()
+    
+    // 监听store中的数据
+    rankingStore.onState("recommendSongs", this.handelRecommendStore)
+    rankingStore.onState("newRanking", this.handelNewRanking)
+    rankingStore.onState("originRanking", this.handelOriginRanking)
+    rankingStore.onState("upRanking", this.handelUpRanking)
+    
+    // 发起action
+    rankingStore.dispatch("fetchRecommendSongsAction")
+    rankingStore.dispatch("fetchRankingDataAction")
+  },
+
+  // 封装发送网络请求函数
+  async fetchMusicBanner() {
+    const res = await getMusicBanner()
+    this.setData({
+      banners: res.banners
+    })
+  },
+  fetchSongMenuList() {
+    getSongMenuList().then(res => {
+      this.setData({ hotMenuList: res.playlists })
+    })
+    getSongMenuList("华语").then(res => {
+      this.setData({ recMenuList: res.playlists })
+    })
+  },
+
+  // 监听input跳转页面
+  onSearchClick() {
+    wx.navigateTo({ url: '../detail-search/detail-search' })
+  },
+
+  // 监听图片加载完成
+  onBannerImageLoad() {
+    // 获取image组件高度
+    querySelectThrottle(".banner-image").then(res => {
+      this.setData({ bannerHeight: res[0].height })
+    })
+  },
+
+  // 监听组件传出的点击事件
+  onRecommendMoreClick() {
+    wx.navigateTo({
+      url: "/pages/detail-song/detail-song",
+    })
+  },
+
+  // 从store获取数据的函数
+  handelRecommendStore(value) {
+    this.setData({ recommendSongs: value.slice(0, 6) })
+  },
+  handelNewRanking(value) {
+    const newRankingInfos = { ...this.data.rankingInfos, newRanking: value }
+    this.setData({
+      rankingInfos: newRankingInfos
+    })
+  },
+  handelOriginRanking(value) {
+    const newRankingInfos = { ...this.data.rankingInfos, OriginRanking: value }
+    this.setData({
+      rankingInfos: newRankingInfos
+    })
+  },
+  handelUpRanking(value) {
+    const newRankingInfos = { ...this.data.rankingInfos, UpRanking: value }
+    this.setData({
+      rankingInfos: newRankingInfos
+    })
+  },
+
+  // 取消监听store中的数据
+  onunload() {
+    rankingStore.offState("recommendSongs", this.handelRecommendStore)
+    rankingStore.offState("newRanking", this.handelNewRanking)
+    rankingStore.offState("originRanking", this.handelOriginRanking)
+    rankingStore.offState("upRanking", this.handelUpRanking)
+  }
 })

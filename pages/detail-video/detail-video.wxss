@@ -65,7 +65,7 @@ page {
   content: "";
   position: absolute;
   left: -37rpx;
-  top: 6rpx;
+  top: 4rpx;
   width: 30rpx;
   height: 24rpx;
   background-size: cover;

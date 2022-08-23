@@ -1,1 +1,19 @@
 /* pages/main-music/main-music.wxss */
+page {
+  --search-background-color: #fff !important;
+  --search-padding: 10px 0 !important;
+
+  box-sizing: border-box;
+  padding: 0 24rpx;
+}
+
+/* 1.轮播图样式 */
+.banner {
+  border-radius: 14rpx;
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+}
+

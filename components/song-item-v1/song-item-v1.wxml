@@ -1,0 +1,16 @@
+<!--components/song-item-v1/song-item-v1.wxml-->
+<view class="item">
+  <view class="cover">
+    <image class="image" src="{{itemData.al.picUrl}}" mode="widthFix"></image>
+  </view>
+  <view class="info">
+    <view class="left">
+      <view class="name">{{itemData.name}}</view>
+      <view class="author">{{itemData.ar[0].name}}</view>
+    </view>
+    <view class="right">
+      <van-icon name="arrow" />
+    </view>
+  </view>
+</view>
+

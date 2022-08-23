@@ -1,0 +1,30 @@
+/* components/song-item-v1/song-item-v1.wxss */
+
+.item {
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.item .cover .image {
+  width: 110rpx;
+  border-radius: 14rpx;
+  overflow: hidden;
+}
+
+.item .info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20rpx;
+  color: #999;
+}
+
+.item .info .name {
+  color: #666;
+}
+
+.item .info .author {
+  font-size: 28rpx;
+}
