@@ -1,5 +1,6 @@
 <!--components/menu-area/menu-area.wxml-->
 <!-- 4.热门歌单展示 -->
+<!-- <view class="menu" wx:if="{{menuList.lenght}}"> -->
 <view class="menu">
   <area-header title="{{title}}" more="全部歌单" bind:moreTap="onMenuMoreClick" />
   <scroll-view class="list" scroll-x enable-flex style="width: {{screenWidth}}px;">

@@ -28,7 +28,7 @@ Page({
     this.fetchSongMenuList()
     
     // 监听store中的数据
-    rankingStore.onState("recommendSongs", this.handelRecommendStore)
+    rankingStore.onState("recommendSongInfo", this.handelRecommendStore)
     rankingStore.onState("newRanking", this.handelNewRanking)
     rankingStore.onState("originRanking", this.handelOriginRanking)
     rankingStore.onState("upRanking", this.handelUpRanking)
@@ -70,28 +70,30 @@ Page({
   // 监听组件传出的点击事件
   onRecommendMoreClick() {
     wx.navigateTo({
-      url: "/pages/detail-song/detail-song",
+      // url: "/pages/detail-song/detail-song?type=recommend",
+      url: "/pages/detail-song/detail-song?type=recommend",
     })
   },
 
   // 从store获取数据的函数
   handelRecommendStore(value) {
-    this.setData({ recommendSongs: value.slice(0, 6) })
+    if (!value.tracks) return
+    this.setData({ recommendSongs: value.tracks.slice(0, 6) })
   },
   handelNewRanking(value) {
-    const newRankingInfos = { ...this.data.rankingInfos, newRanking: value }
+    const newRankingInfos = { ...this.data.rankingInfos, newRanking: value}
     this.setData({
       rankingInfos: newRankingInfos
     })
   },
   handelOriginRanking(value) {
-    const newRankingInfos = { ...this.data.rankingInfos, OriginRanking: value }
+    const newRankingInfos = { ...this.data.rankingInfos, originRanking: value }
     this.setData({
       rankingInfos: newRankingInfos
     })
   },
   handelUpRanking(value) {
-    const newRankingInfos = { ...this.data.rankingInfos, UpRanking: value }
+    const newRankingInfos = { ...this.data.rankingInfos, upRanking: value }
     this.setData({
       rankingInfos: newRankingInfos
     })

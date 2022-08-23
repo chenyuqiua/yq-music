@@ -1,0 +1,20 @@
+<!--components/song-item-v2/song-item-v2.wxml-->
+<wxs src="/utils/format.wxs" module="fmt"></wxs>
+
+<view class="item">
+  <view class="index">
+    {{fmt.padLeft(index)}}
+  </view>
+  <view class="info">
+    <view class="left">
+      <view class="name">{{itemData.name}}</view>
+      <view class="source">
+        <image class="image" src="/asstes/images/icons/sq_icon.png" mode="widthFix"></image>
+        <view class="desc">{{itemData.ar[0].name}} - {{itemData.name}}</view>
+      </view>
+    </view>
+    <view class="right">
+      <van-icon size="28px" color="#aaa" name="play-circle-o" />
+    </view>
+  </view>
+</view>

@@ -16,8 +16,8 @@
 
 .menu-item .count {
   position: absolute;
-  right: 20rpx;
-  bottom: 20rpx;
+  right: 1rpx;
+  bottom: 11rpx;
   padding: 6rpx 10rpx;
   border-radius: 14rpx;
   color: #fff;

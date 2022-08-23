@@ -2,8 +2,12 @@
 // 定义方法, 给时间补零
 function padLeft(time) {
 	// 将时间转为字符串
-	time = time + ""
-	return ("00" + time).slice(time.length)
+  time = time + ""
+  if (time.length < 2) {
+    time = "0" + time
+  }
+  return time
+	// return ("00" + time).slice(time.length)
 }
 
 function formatDate(time) {
@@ -30,5 +34,6 @@ function formatCount(count) {
 
 module.exports = {
   formatCount: formatCount,
-  formatDate: formatDate
+  formatDate: formatDate,
+  padLeft: padLeft
 }

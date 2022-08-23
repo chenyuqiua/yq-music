@@ -1,7 +1,7 @@
 <!--components/ranking-item/ranking-item.wxml-->
 <wxs src="/utils/format.wxs" module="fmt"></wxs>
 
-<view class="ranking">
+<view class="ranking" bindtap="onRankingItemTap">
   <view class="content">
     <view class="name">{{itemData.name}}</view>
     <block wx:for="{{3}}" wx:key="*this">

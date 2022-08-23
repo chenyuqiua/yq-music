@@ -8,7 +8,7 @@ const rankingMap = {
 }
 const rankingStore = new HYEventStore({
   state: {
-    recommendSongs: [], 
+    recommendSongInfo: {}, 
     newRanking: {},
     originRanking: {},
     upRanking: {}
@@ -16,7 +16,7 @@ const rankingStore = new HYEventStore({
   actions: {
     async fetchRecommendSongsAction(ctx) {
       const res = await getPlaylistDetail(3778678)
-      ctx.recommendSongs = res.playlist.tracks
+      ctx.recommendSongInfo = res.playlist
     },
     fetchRankingDataAction(ctx) {
       for (const key in rankingMap) {

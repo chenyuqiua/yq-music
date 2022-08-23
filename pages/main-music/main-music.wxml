@@ -15,6 +15,7 @@
   circular
   indicator-dots
   style="height: {{bannerHeight}}px;"
+  wx:if="{{banners.length}}"
 >
   <block wx:for="{{banners}}" wx:key="bannerid">
     <swiper-item class="item">
@@ -24,26 +25,26 @@
 </swiper>
 
 <!-- 3.推荐歌曲展示 -->
-<!-- <view class="recommend">
+<view class="recommend" wx:if="{{recommendSongs.length}}">
   <area-header title="推荐歌曲" bind:moreTap="onRecommendMoreClick" />
   <view class="recm-list">
     <block wx:for="{{recommendSongs}}" wx:key="id">
       <song-item-v1 itemData="{{item}}" />
     </block>
   </view>
-</view> -->
+</view>
 
 <!-- 4.热门歌单展示 -->
-<!-- <menu-area title="热门歌单" menuList="{{hotMenuList}}" /> -->
+<menu-area title="热门歌单" menuList="{{hotMenuList}}" />
 <!-- 5.推荐歌单展示 -->
-<!-- <menu-area title="推荐歌单" menuList="{{recMenuList}}" /> -->
+<menu-area title="推荐歌单" menuList="{{recMenuList}}" />
 
 <!-- 6.排行榜展示 -->
 <view class="ranking">
   <area-header title="排行榜" hasMore="{{false}}" />
   <view class="ranking-list">
     <block wx:for="{{rankingInfos}}" wx:key="id">
-      <ranking-item itemData="{{item}}" />
+      <ranking-item itemData="{{item}}" key="{{index}}" />
     </block>
   </view>
 </view>

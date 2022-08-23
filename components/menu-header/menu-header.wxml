@@ -1,0 +1,35 @@
+<!--components/menu-header/menu-header.wxml-->
+<wxs src="/utils/format.wxs" module="fmt"></wxs>
+
+<view class="content">
+  <!-- 背景 -->
+  <image class="bg-image" mode="aspectFill" src="{{itemData.coverImgUrl}}"></image>
+  <view class="bg-cover"></view>
+
+  <!-- 内容 -->
+  <view class="album">
+    <view class="left">
+      <image class="image" mode="widthFix" src="{{itemData.coverImgUrl}}"></image>
+    </view>
+    <view class="right">
+      <view class="name">{{itemData.name}}</view>
+      <view class="user">
+        <image class="avatar" mode="widthFix" src="{{itemData.creator.avatarUrl}}"></image>
+        <view class="nickname">{{itemData.creator.nickname}}</view>
+      </view>
+      <view class="desc">简介: {{itemData.description}}</view>
+    </view>
+  </view>
+
+  <!-- 图标 -->
+  <view class="bottom">
+    <view class="item">
+      <image class="icon" mode="widthFix" src="/asstes/images/icons/favor_icon.png"></image>
+      <view class="text">{{fmt.formatCount(itemData.subscribedCount)}}</view>
+    </view>
+    <view class="item">
+      <image class="icon" mode="widthFix" src="/asstes/images/icons/share_icon.png"></image>
+      <view class="text">分享</view>
+    </view>
+  </view>
+</view>
