@@ -1,4 +1,4 @@
-export default function hythrottle(fn, interval = 200, { leading = true, trailing = false } = {}) {
+export default function throttle(fn, interval = 200, { leading = true, trailing = false } = {}) {
   let startTime = 0
   let timer = null
 

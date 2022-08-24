@@ -29,7 +29,7 @@
   <area-header title="推荐歌曲" bind:moreTap="onRecommendMoreClick" />
   <view class="recm-list">
     <block wx:for="{{recommendSongs}}" wx:key="id">
-      <song-item-v1 itemData="{{item}}" />
+      <song-item-v1 bindtap="onSongItemTap" data-index="{{index}}" itemData="{{item}}" />
     </block>
   </view>
 </view>

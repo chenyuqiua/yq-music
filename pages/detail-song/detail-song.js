@@ -1,5 +1,6 @@
 // pages/detail-song/detail-song.js
 import rankingStore from "../../storge/rankingStore"
+import playStore from "../../storge/playStore"
 import { getPlaylistDetail } from "../../services/music"
 
 Page({
@@ -15,7 +16,6 @@ Page({
   onLoad(options) {
     // 确定类型: 1.recommend, 2.ranking
     const type = options.type
-    console.log(type);
     this.setData({ type })
 
     // 根据类型获取store中的共享数据
@@ -33,8 +33,11 @@ Page({
 
   // 发送网络请求
   async fetchMenuSong() {
+    wx.showLoading({
+      title: '加载中'
+    })
     const res = await getPlaylistDetail(this.data.id)
-    console.log(res);
+    wx.hideLoading()
     this.setData({ songInfo: res.playlist })
   },
 
@@ -56,5 +59,12 @@ Page({
     } else if (this.data.type === "recommend") {
       rankingStore.offState("recommendSongInfo", this.handelRanking)
     }
+  },
+
+  // 事件监听
+  onSongItemTap(value) {
+    const index = value.currentTarget.dataset.index
+    playStore.setState("playSongList", this.data.songInfo.tracks)
+    playStore.setState("playSongIndex", index)
   }
 })

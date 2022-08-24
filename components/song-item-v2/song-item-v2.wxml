@@ -1,7 +1,7 @@
 <!--components/song-item-v2/song-item-v2.wxml-->
 <wxs src="/utils/format.wxs" module="fmt"></wxs>
 
-<view class="item">
+<view class="item" bindtap="onSongItemTap">
   <view class="index">
     {{fmt.padLeft(index)}}
   </view>

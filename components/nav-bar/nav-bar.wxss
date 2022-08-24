@@ -1,0 +1,34 @@
+/* components/nav-bar/nav-bar.wxss */
+/* 自定义导航栏 */
+.nav-bar .nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 44px;
+  color: #fff;
+}
+
+.nav .left, .nav .right {
+  width: 120rpx;
+}
+
+.nav .center {
+  flex: 1;
+}
+
+.left, .right, .center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 通过css控制是否显式 */ 
+.left .default,
+.center .default {
+  display: none;
+}
+
+.left .slot:empty + .default,
+.center .slot:empty + .default {
+  display: block;
+}

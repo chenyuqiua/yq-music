@@ -7,6 +7,12 @@
 </view>
 <view class="song-list">
   <block wx:for="{{songInfo.tracks}}" wx:key="id">
-    <song-item-v2 class="song-item" itemData="{{item}}" index="{{index + 1}}" />
+    <song-item-v2 
+      class="song-item" 
+      itemData="{{item}}" 
+      index="{{index + 1}}" 
+      bindtap="onSongItemTap" 
+      data-index="{{index}}"
+    />
   </block>
 </view>

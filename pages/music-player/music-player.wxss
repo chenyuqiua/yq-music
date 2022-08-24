@@ -1,0 +1,135 @@
+/* pages/music-player/music-player.wxss */
+/* 背景样式 */
+.bg-image, .bg-cover {
+  position: fixed;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bg-cover {
+  background-color: rgba(0, 0, 0, .6);
+  backdrop-filter: blur(20px);
+}
+
+/* 导航中插槽的样式 */
+.tabs {
+  display: flex;
+  align-items: center;
+  color: #aaa;
+  font-size: 28rpx;
+}
+
+.tabs .tabs-icon {
+  margin: 6rpx;
+}
+
+.tabs .active {
+  color: #fff;
+}
+
+/* 歌曲布局 */
+.music {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 40rpx 60rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+
+.music .album {
+  flex: 1
+}
+
+.music .album .image {
+  width: 100%;
+  border-radius: 20rpx;
+  /* overflow: hidden; */
+}
+
+.music .info .name {
+  width: 630rpx;
+  font-size: 48rpx;
+  font-weight: 700;
+  
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.music .info .singer {
+  margin-top: 8rpx;
+}
+
+.music .lyric {
+  margin: 16rpx 0;
+  text-align: center;
+  
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.music .proress {
+  margin: 12rpx 0;
+}
+
+.music .proress .slider {
+  margin: 12rpx 4rpx 10rpx 18rpx;
+}
+
+.music .proress .time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.music .controls .btn {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.music .controls .mode {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.music .controls .play {
+  width: 130rpx;
+  height: 130rpx;
+}
+
+/* 歌词布局 */
+.lyric-list {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 40rpx;
+  color: #aaa;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.lyric-list ::-webkit-scrollbar {
+  display: none;
+}
+
+.lyric-list .item {
+  height: 35px;
+  line-height: 35px;
+}
+
+.lyric-list .item.active {
+  color: #fff;
+  font-size: 36rpx;
+  /* transition: font-size 1000 0; */
+}

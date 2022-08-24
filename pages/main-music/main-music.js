@@ -3,6 +3,7 @@ import { getMusicBanner, getSongMenuList } from "../../services/music"
 import querySelect from "../../utils/query-select"
 import throttle from "../../utils/throttle"
 import rankingStore from "../../storge/rankingStore"
+import playStore from "../../storge/playStore"
 
 // 添加节流函数
 const querySelectThrottle = throttle(querySelect)
@@ -38,6 +39,7 @@ Page({
     rankingStore.dispatch("fetchRankingDataAction")
   },
 
+  // -----------------------网络请求-----------------------
   // 封装发送网络请求函数
   async fetchMusicBanner() {
     const res = await getMusicBanner()
@@ -53,12 +55,11 @@ Page({
       this.setData({ recMenuList: res.playlists })
     })
   },
-
+  // -----------------------事件监听-----------------------
   // 监听input跳转页面
   onSearchClick() {
     wx.navigateTo({ url: '../detail-search/detail-search' })
   },
-
   // 监听图片加载完成
   onBannerImageLoad() {
     // 获取image组件高度
@@ -66,7 +67,6 @@ Page({
       this.setData({ bannerHeight: res[0].height })
     })
   },
-
   // 监听组件传出的点击事件
   onRecommendMoreClick() {
     wx.navigateTo({
@@ -74,8 +74,15 @@ Page({
       url: "/pages/detail-song/detail-song?type=recommend",
     })
   },
+  // 监听热门推荐的
+  onSongItemTap(event) {
+    const index = event.currentTarget.dataset.index
+    console.log(index);
+    playStore.setState("playSongList", this.data.recommendSongs)
+    playStore.setState("playSongIndex", index)
+  },
 
-  // 从store获取数据的函数
+  // -----------------------从store获取数据的函数-----------------------
   handelRecommendStore(value) {
     if (!value.tracks) return
     this.setData({ recommendSongs: value.tracks.slice(0, 6) })

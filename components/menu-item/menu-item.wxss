@@ -26,6 +26,7 @@
 }
 
 .menu-item .bottom {
+  height: 88rpx;
   /* 显示两行 */
   white-space: normal;
   overflow: hidden; 

@@ -10,7 +10,11 @@ Page({
     this.fetchAllMenuList()
   },
 
+  // 发送网络请求
   async fetchAllMenuList() {
+    wx.showLoading({
+      title: '加载中',
+    })
     // 获取tags
     const res = await getSongMenuTags()
     const tags = res.tags
@@ -23,6 +27,7 @@ Page({
     }
     // 等待所有promise有结果后添加数据
     Promise.all(allPromise).then(res => {
+      wx.hideLoading()
       this.setData({
         songMenus: res
       })
