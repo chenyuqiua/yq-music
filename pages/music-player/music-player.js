@@ -169,16 +169,6 @@ Page({
     const currentTime = value / 100 * this.data.durationTime
     this.setData({ currentTime })
   }, 100),
-  // onSliderChanging(event) {
-  //   // 滑块拖动的时候, 取消监听歌曲进度的改变
-  //   audioContext.offTimeUpdate()
-
-  //   // 获取拖动滑块后位置的值
-  //   const value = event.detail.value
-
-  //   const currentTime = value / 100 * this.data.durationTime
-  //   this.setData({ currentTime })
-  // },
   // 监听播放暂停
   onPlayOrPause() {
     const isPlaying = audioContext.paused
@@ -242,7 +232,6 @@ Page({
       playModeIndex: modeIndex,
       playModeName: modeNames[modeIndex]
     })
-    console.log(modeIndex);
   },
 
   // ---------------------store共享数据---------------------
