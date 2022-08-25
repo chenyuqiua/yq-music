@@ -2,6 +2,7 @@
 import { getSongDetail, getSongLyric } from "../../services/player"
 import { parseLyric } from "../../utils/parse-lyric"
 import playStore from "../../storge/playStore"
+import throttle from "../../utils/throttle"
 
 const app = getApp()
 const audioContext = wx.createInnerAudioContext()
@@ -157,8 +158,8 @@ Page({
     audioContext.seek(currentTime / 1000)
     this.setData({ currentTime, sliderValue: value })
   },
-  // 滑块拖动过程的监听
-  onSliderChanging(event) {
+  // 滑块拖动过程的监听(对滑块拖动监听函数节流)
+  onSliderChanging: throttle(function (event) {
     // 滑块拖动的时候, 取消监听歌曲进度的改变
     audioContext.offTimeUpdate()
 
@@ -167,7 +168,17 @@ Page({
 
     const currentTime = value / 100 * this.data.durationTime
     this.setData({ currentTime })
-  },
+  }, 100),
+  // onSliderChanging(event) {
+  //   // 滑块拖动的时候, 取消监听歌曲进度的改变
+  //   audioContext.offTimeUpdate()
+
+  //   // 获取拖动滑块后位置的值
+  //   const value = event.detail.value
+
+  //   const currentTime = value / 100 * this.data.durationTime
+  //   this.setData({ currentTime })
+  // },
   // 监听播放暂停
   onPlayOrPause() {
     const isPlaying = audioContext.paused
