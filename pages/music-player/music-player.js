@@ -1,11 +1,11 @@
 // pages/music-player/music-player.js
 import { getSongDetail, getSongLyric } from "../../services/player"
 import { parseLyric } from "../../utils/parse-lyric"
-import playstore from "../../storge/playStore"
 import playStore from "../../storge/playStore"
 
 const app = getApp()
 const audioContext = wx.createInnerAudioContext()
+const modeNames = ["order", "repeat", "random"]
 
 Page({
   data: {
@@ -25,7 +25,9 @@ Page({
     lyricScrollTop: 0,
     playSongList: [],
     playSongIndex: 0,
-    isFirstPlay: true
+    isFirstPlay: true,
+    playModeIndex: 0,
+    playModeName: "order"
   },
   onLoad(options) {
     // 0.获取设备信息
@@ -98,6 +100,7 @@ Page({
     this.fetchSongLyric()
 
     // 3.播放当前的歌曲
+    audioContext.stop()
     audioContext.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`
     audioContext.autoplay = true
 
@@ -131,10 +134,14 @@ Page({
   onSwiperChange(event) {
     this.setData({ currentPage: event.detail.current })
   },
-  // 导航栏点击
+  // 导航栏切换点击
   onNavTabTap(event) {
     const index = event.currentTarget.dataset.index
     this.setData({ currentPage: index })
+  },
+  // 导航栏返回按钮
+  onNavBackTap() {
+    wx.navigateBack()
   },
   // 滑块拖动完成的监听
   onSliderChange(event) {
@@ -187,12 +194,23 @@ Page({
   },
   // 控制上一首或下一首封装的函数
   changeNewSong(isNext = true) {
-    // 获取之前的数据, 将索引重新赋值
+    // 获取之前的数据
     let index = this.data.playSongIndex
     const length = this.data.playSongList.length
-    index = isNext ? index + 1 : index - 1
-    if (index === length) index = 0
-    if (index === -1) index = length - 1
+
+    // 根据不同的模式, 将索引重新赋值
+    switch (this.data.playModeIndex) {
+      case 0: // 顺序播放
+        index = isNext ? index + 1 : index - 1
+        if (index === length) index = 0
+        if (index === -1) index = length - 1
+        break;
+      case 1: // 单曲循环
+        break;
+      case 2: // 随机播放
+        index = Math.floor(Math.random() * length)
+        break;
+    }    
 
     // 根据索引获取歌曲
     const newSong = this.data.playSongList[index]
@@ -203,6 +221,17 @@ Page({
 
     // 将最新的索引保存到共享store中
     playStore.setState("playSongIndex", index)
+  },
+  // 播放模式的监听
+  onModeBtnTap() {
+    let modeIndex = this.data.playModeIndex
+    modeIndex ++
+    if (modeIndex === 3) modeIndex = 0
+    this.setData({ 
+      playModeIndex: modeIndex,
+      playModeName: modeNames[modeIndex]
+    })
+    console.log(modeIndex);
   },
 
   // ---------------------store共享数据---------------------

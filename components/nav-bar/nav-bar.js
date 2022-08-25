@@ -19,5 +19,10 @@ Component({
       // 获取设备信息
       this.setData({ statusHeight: app.globalData.statusBarHeight })
     }
+  },
+  methods: {
+    onLeftClick() {
+      this.triggerEvent("leftClick")
+    }
   }
 })

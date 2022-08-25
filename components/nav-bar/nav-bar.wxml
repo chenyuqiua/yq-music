@@ -4,7 +4,7 @@
   <view class="status" style="height: {{statusHeight}}px;"></view>
   <!-- nav部分 -->
   <view class="nav">
-    <view class="left">
+    <view class="left" bindtap="onLeftClick">
       <view class="slot">
         <slot name="left"></slot>
       </view>

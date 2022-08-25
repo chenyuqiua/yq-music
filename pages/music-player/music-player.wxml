@@ -6,7 +6,7 @@
 <view class="bg-cover"></view>
 
 <!-- 自定义导航栏 -->
-<nav-bar>
+<nav-bar bind:leftClick="onNavBackTap">
   <view class="tabs" slot="center">
     <!-- <view 
       class="{{currentPage === 0 ? 'active' : ''}}" 
@@ -66,7 +66,12 @@
       </view>
     </view>
     <view class="controls">
-      <image class="btn mode" mode="widthFix" src="/asstes/images/player/play_order.png"></image>
+      <image 
+        class="btn mode" 
+        mode="widthFix" 
+        src="/asstes/images/player/play_{{playModeName}}.png" 
+        bindtap="onModeBtnTap"
+      />
       <image 
         class="btn prev" 
         mode="widthFix" 
