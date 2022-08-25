@@ -40,7 +40,9 @@ Page({
     // 1.获取歌曲的id
     const id = options.id
     // 根据id播放歌曲
-    playStore.dispatch("playMusicWithSong", id)
+    if (id) {
+      playStore.dispatch("playMusicWithSong", id)
+    }
 
     // 5.获取store中的共享数据
     playStore.onStates(["playSongList", "playSongIndex"], this.getPlaySongInfosHandler)

@@ -48,3 +48,32 @@
     </block>
   </view>
 </view>
+
+<!-- 7.播放工具栏 -->
+<view class="play-bar-placehorder" wx:if="{{currentSong.name || isPlaying}}"></view>
+  <view class="play-bar" wx:if="{{currentSong.name || isPlaying}}">
+  <view class="left">
+    <image 
+      class="album album-anim " 
+      mode="widthFix" 
+      src="{{currentSong.al.picUrl}}" 
+      style="animation-play-state: {{ isPlaying ? 'running' : 'paused' }};"
+      bindtap="onPlayBarAlbumTap"
+    />
+    <view class="name">{{currentSong.name}} - {{currentSong.ar[0].name}}</view>
+  </view>
+  <view class="right">
+    <image 
+      class="image play" 
+      mode="widthFix" 
+      src="/asstes/images/music/{{!isPlaying ? 'play' : 'pause'}}_icon.png"
+      bindtap="onPlayOrPauseTap"
+    />
+    <image 
+      class="image next" 
+      mode="widthFix" 
+      src="/asstes/images/music/next_icon.png" 
+      bindtap="onNextMusicTap"
+    />
+  </view>
+</view>

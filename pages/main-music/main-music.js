@@ -20,7 +20,11 @@ Page({
     recMenuList: [],
 
     // 排行榜数据
-    rankingInfos: {}
+    rankingInfos: {},
+
+    // 当前播放歌曲数据
+    currentSong: {},
+    isPlaying: false
   },
 
   onLoad() {
@@ -37,6 +41,8 @@ Page({
     // 发起action
     rankingStore.dispatch("fetchRecommendSongsAction")
     rankingStore.dispatch("fetchRankingDataAction")
+
+    playStore.onStates(["currentSong", "isPlaying"], this.handelPlayInfos)
   },
 
   // -----------------------网络请求-----------------------
@@ -81,6 +87,17 @@ Page({
     playStore.setState("playSongList", this.data.recommendSongs)
     playStore.setState("playSongIndex", index)
   },
+  onPlayOrPauseTap() {
+    playStore.dispatch("changeMusicStatus")
+  },
+  onNextMusicTap() {
+    playStore.dispatch("playNewMusic")
+  },
+  onPlayBarAlbumTap() {
+    wx.navigateTo({
+      url: '/pages/music-player/music-player',
+    })
+  },
 
   // -----------------------从store获取数据的函数-----------------------
   handelRecommendStore(value) {
@@ -105,6 +122,14 @@ Page({
       rankingInfos: newRankingInfos
     })
   },
+  handelPlayInfos({currentSong, isPlaying}) {
+    if (currentSong) {
+      this.setData({ currentSong })
+    }
+    if (isPlaying !== undefined) {
+      this.setData({ isPlaying })
+    }
+  },
 
   // 取消监听store中的数据
   onunload() {
@@ -112,5 +137,6 @@ Page({
     rankingStore.offState("newRanking", this.handelNewRanking)
     rankingStore.offState("originRanking", this.handelOriginRanking)
     rankingStore.offState("upRanking", this.handelUpRanking)
+    playStore.offStates(["currentSong", "isPlaying"], this.handelPlayInfos)
   }
 })

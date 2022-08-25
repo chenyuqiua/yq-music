@@ -1,5 +1,6 @@
 // pages/main-video/main-video.js
 import { getTopMVList } from "../../services/video"
+import { audioContext } from "../../storge/playStore"
 
 Page({
   data: {
@@ -43,5 +44,10 @@ Page({
     // 3.请求完数据停止下拉刷新
     wx.stopPullDownRefresh()
 
+  },
+
+  // 监听播放视频暂停歌曲
+  onMusicPlayOrPause() {
+    audioContext.pause()
   }
 })
