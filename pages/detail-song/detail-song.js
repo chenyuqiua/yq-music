@@ -1,7 +1,11 @@
 // pages/detail-song/detail-song.js
 import rankingStore from "../../storge/rankingStore"
 import playStore from "../../storge/playStore"
+import menuStore from "../../storge/menuStore"
 import { getPlaylistDetail } from "../../services/music"
+
+const db = wx.cloud.database()
+const cMenu = db.collection("c_menu")
 
 Page({
   data: {
@@ -11,7 +15,8 @@ Page({
     // 所有类型要展示数据的存放处
     songInfo: {},
     // menu类型数据
-    id: 0
+    id: 0,
+    menuList: []  
   },
   onLoad(options) {
     // 确定类型: 1.recommend, 2.ranking
@@ -28,7 +33,28 @@ Page({
     } else if (type === "menu") {
       this.data.id = options.id
       this.fetchMenuSong()
+    } else if (type === "profile") {
+      const tabname = options.tabname
+      const title = options.title
+      this.handleProfileTabInfos(tabname, title)
+    } else if (type === "menuitem") {
+      const _id = options.id
+      cMenu.doc(_id).get({
+        success: (res) => {
+          const songList = res.data.songList
+          const name = res.data.name
+          this.setData({
+            songInfo: {
+              name,
+              tracks: { ...songList }
+            }
+          })
+        }
+      })
     }
+
+    // 歌单数据
+    menuStore.onState("menuList", this.handleMenuList)
   },
 
   // 发送网络请求
@@ -39,6 +65,18 @@ Page({
     const res = await getPlaylistDetail(this.data.id)
     wx.hideLoading()
     this.setData({ songInfo: res.playlist })
+  },
+
+  async handleProfileTabInfos(tabname, title) {
+    const collection = db.collection(`c_${tabname}`)
+    const res = await collection.where({ _openid: wx.getStorageSync('openid') }).get()
+
+    this.setData({
+      songInfo: {
+        name: title,
+        tracks: res.data
+      }
+    })
   },
 
   // 从store获取数据的函数
@@ -66,5 +104,8 @@ Page({
     const index = value.currentTarget.dataset.index
     playStore.setState("playSongList", this.data.songInfo.tracks)
     playStore.setState("playSongIndex", index)
+  },
+  handleMenuList(value) {
+    this.setData({ menuList: value })
   }
 })

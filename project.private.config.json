@@ -35,6 +35,20 @@
           "query": "id=441491828",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "我的页面",
+          "pathName": "pages/main_profile/main_profile",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "歌单列表",
+          "pathName": "pages/detail-song/detail-song",
+          "query": "type=menu&id=134606748",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

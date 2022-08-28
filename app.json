@@ -7,7 +7,8 @@
     "components/song-item-v1/song-item-v1",
     "pages/detail-song/detail-song",
     "pages/detail-menu/detail-menu",
-    "pages/music-player/music-player"
+    "pages/music-player/music-player",
+    "pages/main_profile/main_profile"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -28,9 +29,14 @@
         "text": "视频",
         "iconPath": "asstes/images/tabbar/video_normal.png",
         "selectedIconPath": "asstes/images/tabbar/video_active.png"
+      },
+      {
+        "pagePath": "pages/main_profile/main_profile",
+        "text": "我的",
+        "iconPath": "asstes/images/tabbar/profile_normal.png",
+        "selectedIconPath": "asstes/images/tabbar/video_active.png"
       }
     ]
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

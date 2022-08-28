@@ -27,7 +27,7 @@
 }
 
 .item .left {
-  width: 540rpx;
+  width: 470rpx;
 }
 
 .item .info .name {
@@ -57,5 +57,12 @@
 }
 
 .item .right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding-right: 20rpx;
+}
+
+.item .right .more {
+  margin-left: 10rpx;
 }

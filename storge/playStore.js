@@ -3,6 +3,8 @@ import { parseLyric } from "../utils/parse-lyric"
 import { getSongDetail, getSongLyric } from "../services/player"
 
 export const audioContext = wx.createInnerAudioContext()
+const db = wx.cloud.database()
+const cHistory = db.collection("c_history")
 
 const playStore = new HYEventStore({
   state: {
@@ -43,6 +45,10 @@ const playStore = new HYEventStore({
       getSongDetail(id).then(res => {
         ctx.currentSong = res.songs[0],
         ctx.durationTime = res.songs[0].dt
+
+        cHistory.add({
+          data: ctx.currentSong
+        })
       })
       // 2.2根据id获取歌曲的歌词数据
       getSongLyric(id).then(res => {
@@ -65,12 +71,14 @@ const playStore = new HYEventStore({
         this.dispatch("timeUpDate")
   
         // 4.2当歌曲没有缓存, 正在加载时, 暂停播放
-        audioContext.onWaiting(() => {
-          audioContext.pause()
-        })
+        // audioContext.onWaiting(() => {
+        //   console.log("111");
+        //   audioContext.pause()
+        // })
   
         // 4.3当歌曲缓存完成时, 继续播放
         audioContext.onCanplay(() => {
+          console.log("222");
           audioContext.play()
         })
   
@@ -127,7 +135,6 @@ const playStore = new HYEventStore({
 
       // 保存当前播放模式
       ctx.playModeIndex = modeIndex
-      // ctx.playModeName = modeNames[modeIndex] 
     },
     // 上一首下一首的切换
     playNewMusic(ctx, isNext = true) {

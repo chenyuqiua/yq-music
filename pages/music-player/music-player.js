@@ -1,6 +1,7 @@
 // pages/music-player/music-player.js
 import playStore, { audioContext } from "../../storge/playStore"
 import throttle from "../../utils/throttle"
+import {getSongDetail, getSongLyric} from "../../services/player"
 
 const app = getApp()
 const modeNames = ["order", "repeat", "random"]

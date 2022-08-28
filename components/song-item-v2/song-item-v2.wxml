@@ -14,7 +14,8 @@
       </view>
     </view>
     <view class="right">
-      <van-icon size="28px" color="#aaa" name="play-circle-o" />
+      <van-icon size="24px" color="#777" name="play-circle-o" />
+      <van-icon size="24px" color="#777" class="more" name="more-o" catchtap="onMoreIconTap" />
     </view>
   </view>
 </view>

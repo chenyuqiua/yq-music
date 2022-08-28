@@ -9,6 +9,7 @@
   <block wx:for="{{songInfo.tracks}}" wx:key="id">
     <song-item-v2 
       class="song-item" 
+      menuList="{{menuList}}"
       itemData="{{item}}" 
       index="{{index + 1}}" 
       bindtap="onSongItemTap" 
