@@ -10,7 +10,7 @@
 
 > 轮播图和推荐歌曲展示
 
-<img src="/Users/chenyq/Documents/coderwhy/笔记/00_项目介绍/img/Snipaste_2022-09-20_22-29-03.png" style="zoom:33%;" />
+![输入图片说明](Snipaste_2022-09-20_22-29-03.png)
 
 > 推荐歌单展示
 
